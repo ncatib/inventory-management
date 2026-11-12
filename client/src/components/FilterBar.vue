@@ -106,14 +106,14 @@ export default {
   border-bottom: 1px solid #e2e8f0;
   padding: 0.75rem 0;
   position: sticky;
-  top: 70px;
+  top: 0;
   z-index: 90;
 }
 
 .filters-container {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 var(--space-8);
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -190,5 +190,49 @@ export default {
 .reset-filters-btn svg {
   width: 18px;
   height: 18px;
+}
+
+@media (max-width: 900px) {
+  .filters-bar {
+    top: var(--mobile-bar-height);
+  }
+
+  /* Stack the grid above the reset button; align-items: flex-start keeps the
+     button left-aligned at its natural size instead of floating beside the grid */
+  .filters-container {
+    padding: 0 var(--space-4);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  /* Two-column grid: label above each select, selects fill their cell */
+  .filters-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: var(--space-3);
+    flex: none;
+    width: 100%;
+  }
+
+  .filter-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-1);
+  }
+
+  /* min-width: 0 lets the select shrink to its grid cell instead of its 140px floor */
+  .filter-select {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/* Very narrow phones: one column so selects stay readable */
+@media (max-width: 380px) {
+  .filters-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 </style>
